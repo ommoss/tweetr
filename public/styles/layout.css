@@ -9,15 +9,21 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
 /*
  * Global layout stuff
  */
 
 body {
-  margin: 0;
-  color: #244751;
-  background-color: #eee;
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #E4E4E4;
+
+}
+main{
+  background-color: #FFFFFF;
+  padding-top: 140px;
+  margin: 0 auto;
+  width: 450px;
+  padding-bottom: 5em;
 }
 
 /*

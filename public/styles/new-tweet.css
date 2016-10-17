@@ -1,0 +1,21 @@
+section{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left:2em;
+  margin-right: 2em;
+  padding-bottom: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  background-color: #E4E4E4;
+}
+section h2{
+  border-bottom: 1px solid black;
+}
+section textarea{
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+  width: 100%;
+}
+section span{
+  float:right;
+}
