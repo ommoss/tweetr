@@ -26,5 +26,14 @@ nav{
 
 #nav-bar .compose{
   float: right;
-  margin-top: 2em;
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-top: 1.25em;
+  padding: 0.5em 1em;
+  color: #00a087;
+}
+
+#nav-bar .compose:hover{
+  color: #000000;
+  border: 1px solid black;
 }

@@ -1,15 +1,4 @@
-
-function loadTweets(){
-  var tweetData = $.ajax({
-    url: "/tweets/",
-    method: "GET",
-    dataType: 'json'
-  });
-  tweetData.done(function(tweetDataObj){
-    renderTweets(tweetDataObj);
-  })
-}
-
+//loads initail tweets from database
 $(function(){
    var tweetData = $.ajax({
     url: "/tweets/",
@@ -24,16 +13,32 @@ $(function(){
   });
 });
 
+//loads new tweets
+function loadTweets(){
+  var tweetData = $.ajax({
+    url: "/tweets/",
+    method: "GET",
+    dataType: 'json'
+  });
+  tweetData.done(function(tweetDataObj){
+    renderTweets(tweetDataObj);
+  })
+}
+
+//clears the textarea after uploading the tweet
 function clearField() {
    document.getElementsByName("text")[0].value = "";
+   document.getElementsByClassName("counter")[0].innerHTML = 140;
+   document.getElementsByClassName("counter")[0].style.color = "";
  }
 
-
+//puts the into the page
 function renderTweets(tweets) {
   var $tweet = createTweetElement(tweets[tweets.length-1]);
   $('#tweets-container').prepend($tweet);
 }
 
+//creates the article for tweets
 function createTweetElement(tweet){
   var date = new Date(tweet.created_at)
 
@@ -53,9 +58,9 @@ function createTweetElement(tweet){
   return a;
 };
 
+//starts the upload tweet system
 $(function(){
   $('#new-tweet').on('submit', function(event){
-    // console.log('gee');
     event.preventDefault();
     const thisFrom = $(this);
     var newTweet = $.ajax({
@@ -67,5 +72,12 @@ $(function(){
       loadTweets(data);
       clearField();
     });
+  });
+});
+
+// Makes the compose button hide and show the new-tweet box
+$(".compose").click(function(){
+  $(".new-tweet").slideToggle("slow","linear",function(){
+    $("textarea[name=text]").focus();
   });
 });
