@@ -22,7 +22,7 @@ function loadTweets(){
   });
   tweetData.done(function(tweetDataObj){
     renderTweets(tweetDataObj);
-  })
+  });
 }
 
 //clears the textarea after uploading the tweet
