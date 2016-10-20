@@ -40,8 +40,8 @@ function renderTweets(tweets) {
 
 //creates the article for tweets
 function createTweetElement(tweet){
-  var date = new Date(tweet.created_at)
 
+  var date = Math.floor((Date.now() - tweet.created_at)/8.64e+7);
   var a = $("<article>").addClass("tweets");
   var h = $("<header>");
   var t = $("<h2>")
@@ -52,7 +52,7 @@ function createTweetElement(tweet){
   s.append(tweet.user.handle);
   t.append(tweet.user.name);
   h.append(i, t, s);
-  f.append(date);
+  f.append(date, " days ago");
   p.append(tweet.content.text);
   a.append(h,p,f);
   return a;
@@ -77,7 +77,7 @@ $(function(){
 
 // Makes the compose button hide and show the new-tweet box
 $(".compose").click(function(){
-  $(".new-tweet").slideToggle("slow","linear",function(){
+  $(".new-tweet").slideToggle("fast","linear",function(){
     $("textarea[name=text]").focus();
   });
 });
