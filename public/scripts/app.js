@@ -6,7 +6,7 @@ $(function(){
     dataType: 'json'
   });
   tweetData.done(function(tweetDataObj){
-    for(var i = tweetDataObj.length-1; i >= 0; i--){
+    for(var i = 0; i < 10; i++){
       var $tweet = createTweetElement(tweetDataObj[i]);
       $('#tweets-container').append($tweet);
     }
@@ -14,7 +14,7 @@ $(function(){
 });
 
 //loads new tweets
-function loadTweets(){
+function loadTweets(data){
   var tweetData = $.ajax({
     url: "/tweets/",
     method: "GET",
@@ -23,29 +23,30 @@ function loadTweets(){
   tweetData.done(function(tweetDataObj){
     renderTweets(tweetDataObj);
   });
+  //renderTweets[data];
 }
 
 //clears the textarea after uploading the tweet
 function clearField() {
-   document.getElementsByName("text")[0].value = "";
-   document.getElementsByClassName("counter")[0].innerHTML = 140;
-   document.getElementsByClassName("counter")[0].style.color = "";
+  document.getElementsByName("text")[0].value = "";
+  document.getElementsByClassName("counter")[0].innerHTML = 140;
+  document.getElementsByClassName("counter")[0].style.color = "";
+  document.getElementsByClassName("tweets")[9].remove();
  }
 
 //puts the into the page
 function renderTweets(tweets) {
-  var $tweet = createTweetElement(tweets[tweets.length-1]);
+  var $tweet = createTweetElement(tweets[0]);
   $('#tweets-container').prepend($tweet);
 }
 
 //creates the article for tweets
 function createTweetElement(tweet){
-
   var date = Math.floor((Date.now() - tweet.created_at)/8.64e+7);
   var a = $("<article>").addClass("tweets");
   var h = $("<header>");
   var t = $("<h2>")
-  var i = $("<image src =" + tweet.user.avatars.small+">").addClass("logo");
+  var i = $("<image src =" + tweet.user.avatars.small +">").addClass("logo");
   var s = $("<span>");
   var f = $("<footer>");
   var p = $("<p>");
@@ -57,7 +58,6 @@ function createTweetElement(tweet){
   a.append(h,p,f);
   return a;
 };
-
 //starts the upload tweet system
 $(function(){
   $('#new-tweet').on('submit', function(event){

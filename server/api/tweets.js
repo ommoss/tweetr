@@ -6,14 +6,6 @@ const tweets  = express.Router();
 
 module.exports = function(db) {
 
-  tweets.get("/", function(req, res) {
-    let tweets = db.getTweets();
-    // simulate delay
-    setTimeout(() => {
-      return res.json(tweets);
-    }, 300);
-  });
-
   tweets.post("/", function(req, res) {
     if (!req.body.text) {
       res.status(400);
@@ -29,7 +21,16 @@ module.exports = function(db) {
       created_at: Date.now()
     };
     db.saveTweet(tweet);
+    db.getTweets();
     return res.send();
+  });
+
+  tweets.get("/", function(req, res) {
+    let tweets = db.getTweets();
+    // simulate delay
+    setTimeout(() => {
+      return res.json(tweets);
+    }, 100);
   });
 
   return tweets;
